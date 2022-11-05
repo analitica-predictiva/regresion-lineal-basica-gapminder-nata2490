@@ -15,7 +15,7 @@ def pregunta_01():
     Complete el código presentado a continuación.
     """
     # Lea el archivo `gm_2008_region.csv` y asignelo al DataFrame `df`
-    df = pd.read_csv('gm_2008_region.csv',',sep=',')
+    df = pd.read_csv('gm_2008_region.csv',sep=',')
 
     # Asigne la columna "life" a `y` y la columna "fertility" a `X`
     y = df['life'].values
@@ -75,11 +75,13 @@ def pregunta_03():
     df = pd.read_csv('gm_2008_region.csv', sep=',')
 
     # Asigne a la variable los valores de la columna `fertility`
-    X_fertility = df['fertility'].values.reshape(-1, 1)
-    
+    X_fertility = df['fertility'].values
+    X_fertility = X_fertility.reshape(-1, 1)
+
     # Asigne a la variable los valores de la columna `life`
-    y_life = df['life'].values.reshape(-1,1)
-    
+    y_life = df['life'].values
+    y_life = y_life.reshape(-1,1)
+
     # Importe LinearRegression
     from sklearn.linear_model import LinearRegression
 
@@ -121,11 +123,13 @@ def pregunta_04():
     df = pd.read_csv('gm_2008_region.csv', sep=',')
 
     # Asigne a la variable los valores de la columna `fertility`
-    X_fertility = df['fertility'].values.reshape(-1,1)
-    
+    X_fertility = df['fertility'].values
+    X_fertility = X_fertility.reshape(-1,1)
+
     # Asigne a la variable los valores de la columna `life`
-    y_life = df['life'].values.reshape(-1,1)
-    
+    y_life = df['life'].values
+    y_life = y_life.reshape(-1,1)
+
     # Divida los datos de entrenamiento y prueba. La semilla del generador de números
     # aleatorios es 53. El tamaño de la muestra de entrenamiento es del 80%
     (X_train, X_test, y_train, y_test,) = train_test_split(
@@ -139,10 +143,10 @@ def pregunta_04():
     linearRegression = LinearRegression()
 
     # Entrene el clasificador usando X_train y y_train
-    linearRegression.fit(X_train, y_train)
+    linearRegression.fit(X_train, y_train.reshape(-1,1))
 
     # Pronostique y_test usando X_test
-    y_pred = linearRegression.predict(X_test)
+    y_pred = linearRegression.predict(X_test.reshape(-1,1))
 
     # Compute and print R^2 and RMSE
     print("R^2: {:6.4f}".format(linearRegression.score(X_test, y_test)))
